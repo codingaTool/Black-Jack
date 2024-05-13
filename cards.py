@@ -1,13 +1,14 @@
+
+
 # Set up the constants:
-hearts   = chr(9829) # Character 9829 is '♥'.
-diamond  = chr(9830) # Character 9830 is '♦'.
-spades   = chr(9824) # Character 9824 is '♠'.
-clubs    = chr(9827) # Character 9827 is '♣'.
+hearts   = chr(9829); # Character 9829 is '♥'.
+diamond  = chr(9830); # Character 9830 is '♦'.
+spades   = chr(9824); # Character 9824 is '♠'.
+clubs    = chr(9827); # Character 9827 is '♣'.
 
-
-black_jack_cards = {
+card_dictionary = {
     'Ace_one' : 1,
-    'Ace_ten' : 11,
+    'Ace_eleven' : 11,
        '3'    : 3,
        '4'    : 4,
        '5'    : 5,
