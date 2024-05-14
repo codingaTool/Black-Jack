@@ -19,75 +19,28 @@ print("shuffled dict", sampled_card_dict)
 #new = extract_card_dict(card_dictionary)  
 def __init_hand_dealt__():
     init_dealer_hand = __card_dict__(sampled_card_dict, 1)
-    print("dealer dealt -->", init_dealer_hand, ' + '"[hidden card]")
+    print(f"dealer dealt -->, {init_dealer_hand.keys()}, [hidden card]")
     init_user_hand = __card_dict__(sampled_card_dict, 2)
-    print("user dealt -->", init_user_hand)
+    print("user dealt -->", init_user_hand.keys())
     return init_dealer_hand, init_user_hand
 
-dealer, user = __init_hand_dealt__() 
-
-print(dealer)
-print(user)
+dealer_hand, user_hand = __init_hand_dealt__() 
 
 
+print(f"{dealer_hand}\n{user_hand}")
 
-#dealer_hand_dealt = hand_dealt_gen (init_hand_dealt_dictionary=initial_hand_dealt)
-#print("dealer dealt -->", dealer_hand_dealt[0] +','+"[card hidden]")
-
-
-
-
-
-'''
-
-
-x=hand_dealt_gen(initial_hand_dealt)
-print(x)
-
-
-
-
-
-def sum_dealt_hand (list_param):
-    sum_list = 0
-    print("param", list_param)
-    for cards_in_list in list_param:
-        print(type(cards_in_list))
-
-        if cards_in_list == 'Ace_one':
-            cards_in_list = card_dictionary['Ace_one']
-            print(cards_in_list)
-
-            #list_param[cards_in_list] =1
-            
-            #sum_list += cards_in_list
-           # return 
+#sums the values in a dealt hand stored in a dictionary
+def __sum_init_dealt_hand__ (sum_dictionary):
+    sum_values = 0
+    for _ in sum_dictionary:
+        sum_values = sum(sum_dictionary.values())
+        print(sum_values)
         
-        elif cards_in_list == 'Ace_eleven':
-            cards_in_list = card_dictionary['Ace_eleven']
-            #list_param[cards_in_list] =11
-            sum_list += int(cards_in_list)
-            print(type(sum_list))
-            return sum_list
-        
-        
-       
 
-        elif cards_in_list == 'Queen' or 'Jack' or 'Queen' or 'King':
-            cards_in_list = card_dictionary['Queen']
-            #list_param[cards_in_list] =10
-            sum_list += cards_in_list
-            return sum_list
-
-
-             else:
-            sum_list = cards_in_list + cards_in_list
-            return sum_list
-'''
-       
-'''
+__sum_init_dealt_hand__(user_hand)
+__sum_init_dealt_hand__(dealer_hand)
     
-
+'''
 
 x=sum_dealt_hand(list_param=user_hand_dealt)
 print(x)
