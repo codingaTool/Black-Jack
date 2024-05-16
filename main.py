@@ -1,5 +1,5 @@
 from cards import hearts, diamond, spades, clubs, card_dictionary
-import random
+import random,os ,sys
 
 
 print("Welcome to Black Jack" +' '+ hearts +' ' + diamond +' '+ spades +' '+ clubs)
@@ -18,7 +18,7 @@ print("shuffled dict", sampled_card_dict)
 
 #deals 2 cards to dealer and user at start of game  
 def __init_hand_dealt__():
-    init_dealer_hand = __card_dict__(sampled_card_dict, 1)
+    init_dealer_hand = __card_dict__(sampled_card_dict, 2)
     print(f"dealer dealt -->, {init_dealer_hand.keys()}, [hidden card]")
     init_user_hand = __card_dict__(sampled_card_dict, 2)
     print("user dealt -->", init_user_hand.keys())
@@ -49,8 +49,43 @@ def __black_jack__(user_hand, dealer_hand):
     elif is_dealer_blackjack ==21:
         print("Black Jack !! Dealer Win!")
 
-
 __black_jack__(user_hand, dealer_hand)
+
+#function to clear the screen
+def __clear_screen__():
+    os.system('clear')
+
+#Quit function
+def __quit_game__():
+    sys.exit()
+
+
+#Increase user or dealer hand by +1 
+def __add_hit__(hit_count):
+    
+    add_hit = __card_dict__(sampled_card_dict, sample_size=hit_count)
+    user_hand.update(add_hit)
+    return user_hand
+    
+jj=__add_hit__(1)
+print("jj ", jj)
+hh=__sum_init_dealt_hand__(__add_hit__(1))    
+print("hh ", hh)
+
+#function to loop game
+restart = False
+while not restart:
+    restart_game = input("Play again?'Y' to continue 'N' to Quit")
+    if restart_game == 'y':
+        __clear_screen__()
+    elif restart_game == 'n':
+        __quit_game__()
+
+        
+#def __gameplay__():
+
+
+
 
 
 
