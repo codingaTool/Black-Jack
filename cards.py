@@ -6,7 +6,7 @@ diamond  = chr(9830); # Character 9830 is '♦'.
 spades   = chr(9824); # Character 9824 is '♠'.
 clubs    = chr(9827); # Character 9827 is '♣'.
 
-card_dictionary = {
+card_dictionary_complete = {
     'Ace_one' : 1,
     'Ace_eleven' : 11,
        '3'    : 3,
