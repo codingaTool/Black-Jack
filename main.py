@@ -4,8 +4,7 @@ import random,os ,sys
 dealer_hand = {}
 user_hand = {}
 
-print("Welcome to Black Jack" +' '+ hearts +' ' + diamond +' '+ spades +' '+ clubs)
-print("Enter 'S' to Start ")
+print("WELCOME TO BLACK JACK" +' '+ hearts +' ' + diamond +' '+ spades +' '+ clubs)
 
 #convert dictionary to list,sample and return new dictionary
 def __card_dict__(dictionary, sample_size):
@@ -38,10 +37,10 @@ def __black_jack__(in_user_hand, in_dealer_hand):
     is_user_blackjack = __sum_init_dealt_hand__(in_user_hand)
     is_dealer_blackjack = __sum_init_dealt_hand__(in_dealer_hand)
     if is_user_blackjack == 21:
-        print("Black Jack !! You Win!")
+        print("BLACK JACK !! YOU WIN!")
         __quit_game__()
     elif is_dealer_blackjack ==21:
-        print("Black Jack !! Dealer Win!")
+        print("BLACK JACK !! DEALER WIN!")
         __quit_game__()
 
 
@@ -54,19 +53,19 @@ def __quit_game__():
     sys.exit()
 
 def __game_money__():
-    game_coins = int(input("Enter your bet: $"))
+    game_coins = int(input("ENTER YOUR BET: $"))
     if game_coins <=0:
-        return sys.exit("No Money No Play, Bye Felicia !")
+        return sys.exit("NO MONEY, NO PLAY, BYE FELICIA !")
     else:
         return game_coins
-
+    
 
 #Add 1 card to user and dealer, reveal 2 dealer cards
 def __add_hit__(dictionary):
     add_hit = False
     while not add_hit:
-        hit = input("(H)IT or (S)TAND").lower()
-        if hit == 'h':
+        hit = input("(H)IT or (S)TAND or (Q)UIT-->>:").lower()
+        if 'h' in hit:
             __clear_screen__()
             new_dealer_hand = __card_dict__(dictionary, 2)
             new_user_hand = __card_dict__(dictionary, 1)
@@ -74,19 +73,58 @@ def __add_hit__(dictionary):
             print(new_user_hand)
             dealer_hand.update(new_dealer_hand.items())
             user_hand.update(new_user_hand.items())
-            print("dealer updated{} user upsated{}".format(list(dealer_hand.keys()),list(user_hand.keys())))
+            print("DEALER HAND{} USER HAND{}".format(list(dealer_hand.keys()),list(user_hand.keys())))
             new_dealer_sum =__sum_init_dealt_hand__(dealer_hand)
             new_user_sum =__sum_init_dealt_hand__(user_hand)
             print("TOTAL: DEALER POINTS:{}\t PLAYER POINTS:{} ".format(new_dealer_sum,new_user_sum))
-            return new_dealer_sum, new_user_sum
-        elif hit !='h':
+            #return new_dealer_sum, new_user_sum
+            if new_dealer_sum >= 21:
+                print("DEALER LOSE!....YOU WIN")
+                __quit_game__()
+            elif new_user_sum >= 21:
+                print("DEALER WON...YOU LOSE")
+                __quit_game__()
+            elif new_dealer_sum >=21 and new_user_sum >= 21:
+                print("THIS GAME IS A DRAW!")
+                __quit_game__()
+            elif new_user_sum<new_dealer_sum<=21:
+                print("DEALER WON...YOU LOSE")
+                __quit_game__()
+            elif new_dealer_sum<new_user_sum<=21:
+                print("DEALER LOSE...YOU WIN")
+                __quit_game__()
+
+            else:
+                break
+        elif 's' in hit:
+
+            __clear_screen__()
+            new_dealer_hand = __card_dict__(dictionary, 2)
+            #new_user_hand = __card_dict__(dictionary, 1)
+            print(new_dealer_hand)
+            print(user_hand)
+            dealer_hand.update(new_dealer_hand.items())
+            #user_hand.update(new_user_hand.items())
+            print("DEALER HAND{} USER HAND{}".format(list(dealer_hand.keys()),list(user_hand.keys())))
+            new_dealer_sum =__sum_init_dealt_hand__(dealer_hand)
+            new_user_sum =__sum_init_dealt_hand__(user_hand)
+            print("TOTAL: DEALER POINTS:{}\t USER POINTS:{} ".format(new_dealer_sum,new_user_sum))
+            if new_dealer_sum >= 21:
+                print("DEALER LOSE!....YOU WIN")
+                __quit_game__()
+            elif new_user_sum >= 21:
+                print("DEALER WON...YOU LOSE")
+                __quit_game__()
+            elif new_dealer_sum and new_user_sum >= 21:
+                print("THIS GAME IS A DRAW!")
+                __quit_game__()
+            else:
+                break
+        elif 'q' in hit:
+            __quit_game__()
+        else: 
             add_hit =True
             break
-
-
-        
-
-
     
 
 def __gameplay__():
@@ -95,35 +133,23 @@ def __gameplay__():
     __clear_screen__()
     print("YOUR BET:${}".format(start_coins))
 
-    
     print("\nDEALER HAND -->>[Hidden Card],{}\n\nPLAYER HAND -->>{}\n".format(list(dealer_hand),list(user_hand)))
 
     __black_jack__(user_hand, dealer_hand)
 
-    new_dealer_sum, new_user_sum = __add_hit__(card_dictionary_complete)
-    
-    dealer_sum =__sum_init_dealt_hand__(dealer_hand)
-    user_sum = __sum_init_dealt_hand__(user_hand)
-    
-    print("TOTAL: DEALER POINTS:{}\t PLAYER POINTS:{} ".format(dealer_sum,user_sum)) 
+    __sum_init_dealt_hand__(dealer_hand)
+    __sum_init_dealt_hand__(user_hand)
 
+    __add_hit__(card_dictionary_complete)
+    
 
      
-   
-
-'''
-    jj=__add_hit__(user_hand,1)
-    print(" hit +1 user", jj)
-    hh=__add_hit__(dealer_hand, 1)
-    print("hh ", hh)
-'''
 
 #function to loop game
 restart = False
 while not restart:
 
     __gameplay__()
-    
     
     restart_game = input("Play again?'Y' to continue 'N' to Quit").lower()
     if restart_game == 'y':
